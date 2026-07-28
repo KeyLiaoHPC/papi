@@ -202,7 +202,7 @@ endif
 ifeq ($(CONFIG_PFMLIB_ARCH_ARM),y)
 
 ifeq ($(SYS),Linux)
-SRCS += pfmlib_arm_perf_event.c pfmlib_arm_armv8_thunderx2_unc_perf_event.c pfmlib_arm_armv8_kunpeng_unc_perf_event.c
+SRCS += pfmlib_arm_perf_event.c pfmlib_arm_armv8_thunderx2_unc_perf_event.c pfmlib_arm_armv8_kunpeng_unc_perf_event.c pfmlib_arm_armv8_tsv200_unc_perf_event.c
 endif
 
 INCARCH = $(INC_ARM)
@@ -212,7 +212,8 @@ SRCS   += pfmlib_arm.c \
 	  pfmlib_arm_armv8.c \
 	  pfmlib_arm_armv9.c \
 	  pfmlib_arm_armv8_thunderx2_unc.c \
-	  pfmlib_arm_armv8_kunpeng_unc.c
+	  pfmlib_arm_armv8_kunpeng_unc.c \
+	  pfmlib_arm_armv8_tsv200_unc.c
 
 CFLAGS += -DCONFIG_PFMLIB_ARCH_ARM
 endif
@@ -220,7 +221,7 @@ endif
 ifeq ($(CONFIG_PFMLIB_ARCH_ARM64),y)
 
 ifeq ($(SYS),Linux)
-SRCS += pfmlib_arm_perf_event.c pfmlib_arm_armv8_thunderx2_unc_perf_event.c pfmlib_arm_armv8_kunpeng_unc_perf_event.c
+SRCS += pfmlib_arm_perf_event.c pfmlib_arm_armv8_thunderx2_unc_perf_event.c pfmlib_arm_armv8_kunpeng_unc_perf_event.c pfmlib_arm_armv8_tsv200_unc_perf_event.c
 endif
 
 INCARCH = $(INC_ARM64)
@@ -228,7 +229,8 @@ SRCS   += pfmlib_arm.c \
 	  pfmlib_arm_armv8.c \
 	  pfmlib_arm_armv9.c \
 	  pfmlib_arm_armv8_thunderx2_unc.c \
-	  pfmlib_arm_armv8_kunpeng_unc.c
+	  pfmlib_arm_armv8_kunpeng_unc.c \
+	  pfmlib_arm_armv8_tsv200_unc.c
 
 CFLAGS += -DCONFIG_PFMLIB_ARCH_ARM64
 endif
@@ -435,6 +437,8 @@ INC_ARM=pfmlib_arm_priv.h			\
 	events/arm_neoverse_v3_events.h		\
 	events/arm_hisilicon_kunpeng_events.h \
 	events/arm_hisilicon_kunpeng_unc_events.h \
+	events/arm_hisilicon_tsv200_events.h \
+	events/arm_hisilicon_tsv200_unc_events.h \
 	events/arm_nvidia_olympus_events.h
 
 INC_ARM64=pfmlib_arm_priv.h			\
@@ -452,6 +456,8 @@ INC_ARM64=pfmlib_arm_priv.h			\
 	events/arm_neoverse_v3_events.h		\
 	events/arm_hisilicon_kunpeng_events.h \
 	events/arm_hisilicon_kunpeng_unc_events.h \
+	events/arm_hisilicon_tsv200_events.h \
+	events/arm_hisilicon_tsv200_unc_events.h \
 	events/arm_nvidia_olympus_events.h
 
 INCDEP=$(INC_COMMON) $(INCARCH)

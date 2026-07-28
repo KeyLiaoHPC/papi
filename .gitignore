@@ -1,0 +1,60 @@
+# PAPI / libpfm4 build intermediates (do not ignore new source files)
+
+# Autotools / configure outputs under src/
+src/Makefile
+src/config.h
+src/config.log
+src/config.status
+src/components_config.h
+src/papi_events_table.h
+src/papi_components_config_event_defs.h
+src/f77papi.h
+src/f90papi.h
+src/fpapi.h
+src/papi.pc
+src/papi_fwrappers_.c
+src/papi_fwrappers__.c
+src/upper_PAPI_FWRAPPERS.c
+
+# Built test and utility binaries (no file extension); keep sources/Makefiles
+src/ctests/*
+!src/ctests/*.*
+!src/ctests/Makefile
+
+src/ftests/*
+!src/ftests/*.*
+!src/ftests/Makefile
+
+src/utils/*
+!src/utils/*.*
+!src/utils/Makefile
+
+src/validation_tests/*
+!src/validation_tests/*.*
+!src/validation_tests/Makefile
+
+src/testlib/*
+!src/testlib/*.*
+!src/testlib/Makefile
+
+src/components/*/tests/*
+!src/components/*/tests/*.*
+!src/components/*/tests/Makefile
+
+# Generated make fragments (after *.* exceptions so these win)
+**/Makefile.target
+**/Makefile_comp_tests.target
+
+# Compiled objects and libraries (after binary-dir exceptions so these win)
+*.o
+*.lo
+*.a
+*.so
+*.so.*
+*.la
+*.pyc
+*~
+
+# libpfm4 local build leftovers (sources remain tracked)
+src/libpfm4/lib/libpfm.so*
+src/libpfm4/lib/libpfm.a
