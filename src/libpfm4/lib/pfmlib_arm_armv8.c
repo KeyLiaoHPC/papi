@@ -44,6 +44,7 @@
 #include "events/arm_neoverse_v1_events.h"	/* Arm Neoverse V1 table */
 #include "events/arm_hisilicon_kunpeng_events.h" /* HiSilicon Kunpeng PMU tables */
 #include "events/arm_hisilicon_tsv200_events.h" /* HiSilicon TaiShan v200 PMU tables */
+#include "events/arm_hisilicon_hip11_events.h" /* HiSilicon HIP11 PMU tables */
 
 static int
 pfm_arm_detect_n1(void *this)
@@ -157,6 +158,15 @@ pfm_arm_detect_hisilicon_tsv200(void *this)
 {
 	/* HiSilicon TaiShan v200 / Kunpeng 920 V200 */
 	arm_cpuid_t attr = { .impl = 0x48, .arch = 8, .part = 0xd02 };
+
+	return pfm_arm_detect(&attr, NULL);
+}
+
+static int
+pfm_arm_detect_hisilicon_hip11(void *this)
+{
+	/* HiSilicon HIP11 / Kunpeng 920 72F8 */
+	arm_cpuid_t attr = { .impl = 0x48, .arch = 8, .part = 0xd22 };
 
 	return pfm_arm_detect(&attr, NULL);
 }
@@ -412,6 +422,33 @@ pfmlib_pmu_t arm_hisilicon_tsv200_support={
 	.supported_plm  = ARMV8_PLM,
 	.pe             = arm_tsv200_pe,
 	.pmu_detect     = pfm_arm_detect_hisilicon_tsv200,
+	.max_encoding   = 1,
+	.num_cntrs      = 8,
+	.num_fixed_cntrs = 1,
+
+	.get_event_encoding[PFM_OS_NONE] = pfm_arm_get_encoding,
+	PFMLIB_ENCODE_PERF(pfm_arm_get_perf_encoding),
+	.get_event_first        = pfm_arm_get_event_first,
+	.get_event_next         = pfm_arm_get_event_next,
+	.event_is_valid         = pfm_arm_event_is_valid,
+	.validate_table         = pfm_arm_validate_table,
+	.get_event_info         = pfm_arm_get_event_info,
+	.get_event_attr_info    = pfm_arm_get_event_attr_info,
+	PFMLIB_VALID_PERF_PATTRS(pfm_arm_perf_validate_pattrs),
+	.get_event_nattrs       = pfm_arm_get_event_nattrs,
+};
+
+/* HiSilicon HIP11 / Kunpeng 920 72F8 (MIDR part 0xd22) */
+pfmlib_pmu_t arm_hisilicon_hip11_support={
+	.desc           = "Hisilicon HIP11",
+	.name           = "arm_hip11",
+	.perf_name      = "armv8_pmuv3_0,armv8_pmuv3",
+	.pmu            = PFM_PMU_ARM_HIP11,
+	.pme_count      = LIBPFM_ARRAY_SIZE(arm_hip11_pe),
+	.type           = PFM_PMU_TYPE_CORE,
+	.supported_plm  = ARMV8_PLM,
+	.pe             = arm_hip11_pe,
+	.pmu_detect     = pfm_arm_detect_hisilicon_hip11,
 	.max_encoding   = 1,
 	.num_cntrs      = 8,
 	.num_fixed_cntrs = 1,

@@ -23,4 +23,7 @@ extern int pfm_kunpeng_unc_get_perf_encoding(void *this, pfmlib_event_desc_t *e)
 
 extern int pfm_tsv200_unc_get_event_encoding(void *this, pfmlib_event_desc_t *e);
 extern int pfm_tsv200_unc_get_perf_encoding(void *this, pfmlib_event_desc_t *e);
+
+extern int pfm_hip11_unc_get_event_encoding(void *this, pfmlib_event_desc_t *e);
+extern int pfm_hip11_unc_get_perf_encoding(void *this, pfmlib_event_desc_t *e);
 #endif /* PFMLIB_ARM_ARMV8_UNC_PRIV_H */
